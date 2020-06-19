@@ -39,13 +39,13 @@ pub fn create_transition(data: &Vec<u8>, prevhash: digest::generic_array::Generi
     }
 }
 
-pub fn apply_transition<'a>(prevstate: State<'a>, stateTransition: StateTransition<'a>) -> State<'a> {
+pub fn apply_transition<'a>(prevstate: State<'a>, state_transition: StateTransition<'a>) -> State<'a> {
     let mut data_list = prevstate.data;
-    data_list.push(stateTransition.data);
+    data_list.push(state_transition.data);
 
     State {
         data: data_list,
-        hash: stateTransition.hash,
+        hash: state_transition.hash,
     }
 }
 
