@@ -49,12 +49,12 @@ pub fn apply_transition<'a>(prevstate: State<'a>, state_transition: StateTransit
     }
 }
 
-pub fn verify_hash_transition<'a>(state: State<'a>, stateTransition: StateTransition<'a>) -> bool {
-    let datahash = blake2s_hash(stateTransition.data);
+pub fn verify_hash_transition<'a>(state: State<'a>, state_transition: StateTransition<'a>) -> bool {
+    let datahash = blake2s_hash(state_transition.data);
     let prevhash = state.hash;
     let data = [datahash.to_vec(), prevhash.to_vec()].concat();
     let hash = blake2s_hash(&data);
-    hash == stateTransition.hash
+    hash == state_transition.hash
 }
 
 pub fn create_inital_state<'a>(genesis_seed: GenesisSeed<'a>) -> State {
